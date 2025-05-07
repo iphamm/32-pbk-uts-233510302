@@ -8,11 +8,13 @@ const todos = ref([
 
 const newTodo = ref('')
 const filter = ref('all')
+const showPopup = ref(false)
 
 const addTodo = () => {
   if (newTodo.value.trim()) {
     todos.value.push({ text: newTodo.value, done: false})
     newTodo.value = ''
+    showPopup.value = false
   }
 }
 
@@ -30,8 +32,12 @@ const filteredTodos = computed(() => {
 <template>
   <div>
     <h1>To-Do List</h1>
-    <input v-model="newTodo" placeholder="Enter new task" />
-    <button @click="addTodo">Add</button>
+    <button @click="showPopup = true">+</button>
+    <div v-if="showPopup" class="popup">
+      <input v-model="newTodo" placeholder="Enter new task" />
+      <button @click="addTodo">Add</button>
+      <button @click="showPopup = false">Cancel</button>
+    </div>
     <button @click="filter = 'all'" :class="{ active: filter === 'all' }">All</button>
     <button @click="filter = 'todo'" :class="{ active: filter === 'todo' }">To Do</button>
     <button @click="filter = 'done'" :class="{ active: filter === 'done' }">Done</button>
