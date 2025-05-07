@@ -27,6 +27,7 @@ const removeTodo = (index) => {
     <button @click="addTodo">Add</button>
     <ul>
       <li v-for="(todo, index) in todos" :key="index">
+        <input type="checkbox" v-model="todo.done" />
         {{ todo.text }}
         <button @click="removeTodo(index)">✖</button>
       </li>
