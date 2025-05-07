@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const todos = ref([
   { text: 'Cardio', done: false },
@@ -7,6 +7,7 @@ const todos = ref([
 ])
 
 const newTodo = ref('')
+const filter = ref('')
 
 const addTodo = () => {
   if (newTodo.value.trim()) {
@@ -18,6 +19,12 @@ const addTodo = () => {
 const removeTodo = (index) => {
   todos.value.splice(index, 1)
 }
+
+const filteredTodos = computed(() => {
+  if (filter.value === 'todo') return todos.value.filter(t => !t.done)
+  if (filter.value === 'done') return todos.value.filter(t => t.done)
+  return todos.value
+})
 </script>
 
 <template>
@@ -25,8 +32,10 @@ const removeTodo = (index) => {
     <h1>To-Do List</h1>
     <input v-model="newTodo" placeholder="Enter new task" />
     <button @click="addTodo">Add</button>
+    <button @click="filter = 'todo'" :class="{ active: filter === 'todo' }">To Do</button>
+    <button @click="filter = 'done'" :class="{ active: filter === 'done' }">Done</button>
     <ul>
-      <li v-for="(todo, index) in todos" :key="index">
+      <li v-for="(todo, index) in filteredTodos" :key="index">
         <input type="checkbox" v-model="todo.done" />
         <span :class="{ done: todo.done }">{{ todo.text }}</span>
         <button @click="removeTodo(index)">✖</button>
