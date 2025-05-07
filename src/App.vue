@@ -14,6 +14,10 @@ const addTodo = () => {
     newTodo.value = ''
   }
 }
+
+const removeTodo = (index) => {
+  todos.value.splice(index, 1)
+}
 </script>
 
 <template>
@@ -24,6 +28,7 @@ const addTodo = () => {
     <ul>
       <li v-for="(todo, index) in todos" :key="index">
         {{ todo.text }}
+        <button @click="removeTodo(index)">✖</button>
       </li>
     </ul>
   </div>
