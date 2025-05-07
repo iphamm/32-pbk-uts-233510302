@@ -2,14 +2,25 @@
 import { ref } from 'vue'
 
 const todos = ref([
-  { text: 'Cardio'},
-  { text: 'Watch Netflix Movie'},
+  { text: 'Cardio', done: false },
+  { text: 'Watch Netflix Movie', done: true },
 ])
+
+const newTodo = ref('')
+
+const addTodo = () => {
+  if (newTodo.value.trim()) {
+    todos.value.push({ text: newTodo.value, done: false})
+    newTodo.value = ''
+  }
+}
 </script>
 
 <template>
   <div>
     <h1>To-Do List</h1>
+    <input v-model="newTodo" placeholder="Enter new task" />
+    <button @click="addTodo">Add</button>
     <ul>
       <li v-for="(todo, index) in todos" :key="index">
         {{ todo.text }}
