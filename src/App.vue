@@ -7,7 +7,7 @@ const todos = ref([
 ])
 
 const newTodo = ref('')
-const filter = ref('')
+const filter = ref('all')
 
 const addTodo = () => {
   if (newTodo.value.trim()) {
@@ -32,6 +32,7 @@ const filteredTodos = computed(() => {
     <h1>To-Do List</h1>
     <input v-model="newTodo" placeholder="Enter new task" />
     <button @click="addTodo">Add</button>
+    <button @click="filter = 'all'" :class="{ active: filter === 'all' }">All</button>
     <button @click="filter = 'todo'" :class="{ active: filter === 'todo' }">To Do</button>
     <button @click="filter = 'done'" :class="{ active: filter === 'done' }">Done</button>
     <ul>
