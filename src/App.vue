@@ -28,7 +28,7 @@ const removeTodo = (index) => {
     <ul>
       <li v-for="(todo, index) in todos" :key="index">
         <input type="checkbox" v-model="todo.done" />
-        {{ todo.text }}
+        <span :class="{ done: todo.done }">{{ todo.text }}</span>
         <button @click="removeTodo(index)">✖</button>
       </li>
     </ul>
@@ -36,5 +36,8 @@ const removeTodo = (index) => {
 </template>
 
 <style scoped>
-
+.done {
+  text-decoration: line-through;
+  color: #000;
+}
 </style>
