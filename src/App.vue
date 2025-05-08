@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import characterImg from "./assets/character.png"
 
 const todos = ref([
   { text: 'Cardio', done: false },
@@ -9,6 +10,14 @@ const todos = ref([
 const newTodo = ref('')
 const filter = ref('all')
 const showPopup = ref(false)
+const showCharacter = ref(false)
+
+const triggerCharacter = () => {
+  showCharacter.value = true
+  setTimeout(() => {
+    showCharacter.value = false
+  }, 2500)
+}
 
 const addTodo = () => {
   if (newTodo.value.trim()) {
@@ -35,10 +44,13 @@ const filteredTodos = computed(() => {
 </script>
 
 <template>
+  <div class="character">
+    <img v-if="showCharacter" :src="characterImg" alt="character" class="character-pic">
+  </div>
   <div class="app">
     <h1 class="title">To-Do List</h1>
 
-    <button class="add-btn" @click="showPopup = true">+</button>
+    <button class="add-btn" @click="showPopup = true; triggerCharacter()">+</button>
 
     <div v-if="showPopup" class="popup">
       <div class="popup-card"> 
@@ -77,9 +89,11 @@ const filteredTodos = computed(() => {
   height: 750px;
   width: 750px;
   color: #000;
+  border: 2px solid #000;
   box-shadow: 4px 4px #000;
   display: flex;
   flex-direction: column;
+  z-index: 0;
 }
 
 .title {
@@ -112,7 +126,7 @@ const filteredTodos = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 3;
 }
 
 .popup-card {
@@ -173,7 +187,7 @@ const filteredTodos = computed(() => {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .navbar button {
@@ -194,7 +208,7 @@ const filteredTodos = computed(() => {
 }
 
 .todo-list {
-  max-height: 250px;
+  flex: 1;
   overflow-y: auto;
   margin-bottom: 1rem;
 }
@@ -298,5 +312,34 @@ button {
 
 button:hover {
   border-color: #ffffff
+}
+
+.character-pic {
+  position: fixed;
+  right: 0;
+  bottom: 3rem;
+  width: 450px;
+  height: auto;
+  z-index: 3;
+  animation: slideInRight 2.5s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  20% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }
 </style>
