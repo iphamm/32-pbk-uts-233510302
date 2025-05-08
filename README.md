@@ -30,7 +30,7 @@ Aplikasi **To-Do List** ini dibangun menggunakan **VueJS** dan **ViteJS** untuk 
 
 ## 🎨 **Tampilan Aplikasi**
 
-![Aplikasi To-Do List](./assets/preview-app.png)
+![Aplikasi To-Do List](./src/assets/preview-app.png)
 
 ---
 
@@ -71,4 +71,7 @@ Ikuti langkah-langkah berikut untuk menjalankan aplikasi ini di lingkungan penge
 
 1. **Clone repositori**:
    ```bash
-   git clone https://github.com/iphamm/32-pbk-uts-NPM.git
+   git clone https://github.com/iphamm/32-pbk-uts-233510302.git
+   cd 32-pbk-uts-233510302
+   npm install
+   npm run dev
