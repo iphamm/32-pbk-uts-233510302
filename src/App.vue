@@ -18,6 +18,11 @@ const addTodo = () => {
   }
 }
 
+const cancelAdd = () => {
+  newTodo.value = ''
+  showPopup.value = false
+}
+
 const removeTodo = (index) => {
   todos.value.splice(index, 1)
 }
@@ -40,7 +45,7 @@ const filteredTodos = computed(() => {
         <input v-model="newTodo" placeholder="Enter new task" />
         <div class="popup-actions">
           <button class="add-btn-popup" @click="addTodo">Add</button>
-          <button class="cancel-btn-popup" @click="showPopup = false">Cancel</button>
+          <button class="cancel-btn-popup" @click="cancelAdd">Cancel</button>
         </div>
       </div>
     </div>
